@@ -24,8 +24,22 @@
     let paths = $state<string[]>([]);
 
     // Grouping questions dynamically for the mobile flow view (no hardcoding count)
-    const questions = initialNodes.filter(node => node.type === 'text');
+    const questions = $derived(initialNodes
+        .filter(node => node.type === 'text')
+        .map(node => ({
+            ...node,
+            text: homeState.t(node.text || '')
+        }))
+    );
     const getImagesForQuestion = (qId: string) => initialNodes.filter(node => node.type === 'image' && node.parentId === qId);
+
+    // Reactively translate desktop text nodes
+    let translatedComputedNodes = $derived(computedNodes.map(node => {
+        if (node.type === 'text') {
+            return { ...node, text: homeState.t(node.text || '') };
+        }
+        return node;
+    }));
 
     function updateLayout() {
         if (!container || isMobileOrTablet) return;
@@ -97,7 +111,7 @@
         });
     }
 
-    onMount(async () => {
+    onMount(() => {
         // Handle responsive breakpoint in onMount for SSR safety
         const mediaQuery = window.matchMedia('(max-width: 1279px)');
         isMobileOrTablet = mediaQuery.matches;
@@ -110,13 +124,13 @@
         };
         mediaQuery.addEventListener('change', handleMediaQueryChange);
 
-        await tick();
-        
-        if (container) {
-            resizeObserver = new ResizeObserver(() => scheduleUpdate());
-            resizeObserver.observe(container);
-            scheduleUpdate();
-        }
+        tick().then(() => {
+            if (container) {
+                resizeObserver = new ResizeObserver(() => scheduleUpdate());
+                resizeObserver.observe(container);
+                scheduleUpdate();
+            }
+        });
 
 		return () => {
 			mediaQuery.removeEventListener('change', handleMediaQueryChange);
@@ -143,13 +157,13 @@
         <!-- Centered Header in Mobile Document Flow -->
         <div class="graph-flow-header">
             <h2 class="graph-flow-title">
-                La mejor ingeniería comienza comprendiendo a las personas
+                {homeState.t('La mejor ingeniería comienza comprendiendo a las personas')}
             </h2>
             <p class="graph-flow-subtitle">
-                Escuchamos antes de diseñar. Diseñamos antes de desarrollar.
+                {homeState.t('Escuchamos antes de diseñar. Diseñamos antes de desarrollar.')}
             </p>
             <button class="btn graph-flow-btn" onclick={() => homeState.openModal('Discover App')}>
-                Nuestra Filosofía
+                {homeState.t('graph.mobile.btn')}
             </button>
         </div>
 
@@ -181,20 +195,20 @@
             {/each}
         </svg>
 
-        {#each computedNodes as node (node.id)}
+        {#each translatedComputedNodes as node (node.id)}
             <Node {node} bind:el={nodeEls[node.id]} />
         {/each}
 
         <!-- Absolute Centered Overlay for Desktop -->
         <div class="graph-overlay-content">
             <h2 class="graph-overlay-title">
-                La mejor ingeniería comienza comprendiendo a las personas
+                {homeState.t('La mejor ingeniería comienza comprendiendo a las personas')}
             </h2>
             <p class="graph-overlay-subtitle">
-                Escuchamos antes de diseñar. Diseñamos antes de desarrollar.
+                {homeState.t('Escuchamos antes de diseñar. Diseñamos antes de desarrollar.')}
             </p>
             <button class="btn graph-overlay-btn" onclick={() => homeState.openModal('Discover App')}>
-                Nuestra Filosofía
+                {homeState.t('graph.mobile.btn')}
             </button>
         </div>
     </div>

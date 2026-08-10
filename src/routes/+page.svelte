@@ -1,37 +1,43 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { HomeState } from '$lib/homeState.svelte';
 	import Navbar from '$lib/components/Navbar.svelte';
 	import Graph from '$lib/components/graph/Graph.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import '$lib/styles/home.css';
 	import macImage from '$lib/images/Hero/Mac copy.png';
+	import landingVideo from '$lib/images/app/Landing.mp4';
 
-	const state = new HomeState();
+	const homeState = new HomeState();
+
+	onMount(() => {
+		homeState.initLanguage();
+	});
 </script>
 
 <svelte:head>
-	<title>WYLEN — Engineering that inspires.</title>
+	<title>{homeState.currentLanguage === 'es' ? 'WYLEN — Ingeniería que inspira.' : 'WYLEN — Engineering that inspires.'}</title>
 	<script src="https://embed.mckp.live/embed.js" async></script>
 </svelte:head>
 
 <div class="page-container">
 	<!-- Navbar Component -->
-	<Navbar {state} />
+	<Navbar state={homeState} />
 
 	<!-- Hero Section -->
 	<section class="hero-section">
 		<div class="hero-grid">
 			<div class="hero-text-content">
-				<h1 class="hero-title">Engineering that inspires.</h1>
+				<h1 class="hero-title">{homeState.t('hero.title')}</h1>
 				<p class="hero-subtitle">
-					Construimos herramientas digitales que impulsan el crecimiento de las personas y las organizaciones.
+					{homeState.t('hero.subtitle')}
 				</p>
 				<div class="hero-buttons">
-					<button class="btn btn-dark" onclick={() => state.openModal('Explore Models')}>
-						Conversemos
+					<button class="btn btn-dark" onclick={() => homeState.openModal('Explore Models')}>
+						{homeState.t('hero.cta.talk')}
 					</button>
-					<button class="btn btn-light" onclick={() => state.openModal('Book Your Ride')}>
-						Nuestro trabajo
+					<button class="btn btn-light" onclick={() => homeState.openModal('Book Your Ride')}>
+						{homeState.t('hero.cta.work')}
 					</button>
 				</div>
 			</div>
@@ -48,27 +54,28 @@
 		<div class="bike-grid">
 			<!-- Classic Card (Dark Charcoal) -->
 			<div class="bike-card card-dark">
-				<div class="card-badge">WYLEN</div>
+				<div class="card-badge">{homeState.t('projects.badge')}</div>
 				<div class="card-content">
-					<h2 class="card-title">Software empresarial</h2>
+					<h2 class="card-title">{homeState.t('projects.classic.title')}</h2>
 					<p class="card-description">
-						Plataformas diseñadas para crecer con tu negocio.
+						{homeState.t('projects.classic.desc')}
 					</p>
-					<button class="btn btn-pill-sand" onclick={() => state.openModal('Book Your Ride - Classic')}>
-						Saber más
+					<button class="btn btn-pill-sand" onclick={() => homeState.openModal('Book Your Ride - Classic')}>
+						{homeState.t('projects.more')}
 					</button>
 				</div>
 			</div>
 
 			<!-- Cruiser Card (Taupe / Beige) -->
 			<div class="bike-card card-taupe">
-				<div class="card-badge dark-badge">WYLEN</div>
+				<div class="card-badge dark-badge">{homeState.t('projects.badge')}</div>
 				<div class="card-content">
-					<h2 class="card-title">Productos digitales</h2>
+					<h2 class="card-title">{homeState.t('projects.cruiser.title')}</h2>
 					<p class="card-description">
-						Aplicaciones rápidas, intuitivas y construidas para durar.					</p>
-					<button class="btn btn-pill-sand" onclick={() => state.openModal('Book Your Ride - Cruiser')}>
-						Saber más
+						{homeState.t('projects.cruiser.desc')}
+					</p>
+					<button class="btn btn-pill-sand" onclick={() => homeState.openModal('Book Your Ride - Cruiser')}>
+						{homeState.t('projects.more')}
 					</button>
 				</div>
 			</div>
@@ -80,21 +87,17 @@
 		<div class="content-section-inner">
 			<div class="content-section-grid">
 				<div class="content-section-text">
-					<span class="content-section-label">FILOSOFÍA</span>
-					<h2 class="content-section-title">Cada línea de código debería tener un propósito claro</h2>
+					<span class="content-section-label">{homeState.t('philosophy.label')}</span>
+					<h2 class="content-section-title">{homeState.t('philosophy.title')}</h2>
 					<p class="content-section-description">
-						No creemos en la complejidad por la complejidad. Cada decisión técnica que tomamos
-						responde a una necesidad real, medible y conectada con el resultado final. Cuando la tecnología
-						se diseña con intención, el impacto se multiplica.
+						{homeState.t('philosophy.desc')}
 					</p>
 				</div>
 				<div class="content-section-text">
-					<span class="content-section-label">ENFOQUE</span>
-					<h2 class="content-section-title">Construimos para las personas que usarán lo que creamos</h2>
+					<span class="content-section-label">{homeState.t('approach.label')}</span>
+					<h2 class="content-section-title">{homeState.t('approach.title')}</h2>
 					<p class="content-section-description">
-						El software más sofisticado no es el que tiene más funciones, sino el que resuelve problemas
-						reales con la menor fricción posible. Nuestro trabajo empieza escuchando, entendiendo
-						contextos y traduciendo necesidades en soluciones elegantes.
+						{homeState.t('approach.desc')}
 					</p>
 				</div>
 			</div>
@@ -103,7 +106,7 @@
 
 	<section id="connect" class="app-promo-section">
 		<div class="graph-section-wrapper" style="position: relative; width: 100vw; margin-left: calc(-50vw + 50%); display: flex; align-items: center; justify-content: center;">
-			<Graph {state} />
+			<Graph state={homeState} />
 		</div>
 	</section>
 
@@ -111,27 +114,25 @@
 	<section class="content-section-beige">
 		<div class="content-section-inner">
 			<div class="content-section-centered">
-				<span class="content-section-label">PROCESO</span>
-				<h2 class="content-section-title-lg">Ingeniería con disciplina,<br />diseño con empatía</h2>
+				<span class="content-section-label">{homeState.t('process.label')}</span>
+				<h2 class="content-section-title-lg">{@html homeState.t('process.title')}</h2>
 				<p class="content-section-description-lg">
-					Nuestro proceso combina rigor técnico con una comprensión profunda del contexto humano.
-					No entregamos proyectos: entregamos sistemas que evolucionan, herramientas que perduran
-					y experiencias que las personas realmente quieren usar.
+					{homeState.t('process.desc')}
 				</p>
 			</div>
 
 			<div class="content-stats-grid">
 				<div class="content-stat">
-					<span class="content-stat-number">97%</span>
-					<span class="content-stat-label">Retención de clientes a largo plazo</span>
+					<span class="content-stat-number">{homeState.t('stats.retention.num')}</span>
+					<span class="content-stat-label">{homeState.t('stats.retention.label')}</span>
 				</div>
 				<div class="content-stat">
-					<span class="content-stat-number">3x</span>
-					<span class="content-stat-label">Velocidad promedio de iteración</span>
+					<span class="content-stat-number">{homeState.t('stats.speed.num')}</span>
+					<span class="content-stat-label">{homeState.t('stats.speed.label')}</span>
 				</div>
 				<div class="content-stat">
-					<span class="content-stat-number">40+</span>
-					<span class="content-stat-label">Sistemas en producción activa</span>
+					<span class="content-stat-number">{homeState.t('stats.production.num')}</span>
+					<span class="content-stat-label">{homeState.t('stats.production.label')}</span>
 				</div>
 			</div>
 		</div>
@@ -139,25 +140,15 @@
 
 	<!-- Video Banner Section -->
 	<section class="video-banner-section">
-		{#if state.isPlayingVideo}
-			<div class="video-player-container">
-				<iframe 
-					src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1" 
-					title="Cowboy Feature Video" 
-					allow="autoplay; encrypted-media" 
-					allowfullscreen
-				></iframe>
-				<button class="close-video-btn" onclick={state.toggleVideo}>✕ Close Video</button>
-			</div>
-		{:else}
-			<div class="video-overlay">
-				<button class="play-button" onclick={state.toggleVideo} aria-label="Play video">
-					<svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
-						<path d="M8 5v14l11-7z"/>
-					</svg>
-				</button>
-			</div>
-		{/if}
+		<!-- svelte-ignore a11y_media_has_caption -->
+		<video
+			src={landingVideo}
+			autoplay
+			loop
+			muted
+			playsinline
+			class="video-banner-bg"
+		></video>
 	</section>
 
 	<!-- Content Section BELOW Video -->
@@ -170,10 +161,9 @@
 							<path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
 						</svg>
 					</div>
-					<h3 class="content-card-title">Arquitectura escalable</h3>
+					<h3 class="content-card-title">{homeState.t('features.architecture.title')}</h3>
 					<p class="content-card-description">
-						Diseñamos sistemas que crecen contigo. Cada componente se construye pensando en el siguiente nivel
-						de complejidad, sin sacrificar la simplicidad actual.
+						{homeState.t('features.architecture.desc')}
 					</p>
 				</div>
 				<div class="content-section-card">
@@ -183,10 +173,9 @@
 							<path d="M12 6v6l4 2"/>
 						</svg>
 					</div>
-					<h3 class="content-card-title">Entrega continua</h3>
+					<h3 class="content-card-title">{homeState.t('features.delivery.title')}</h3>
 					<p class="content-card-description">
-						Iteraciones rápidas con despliegues automatizados. Cada cambio pasa por pruebas rigurosas
-						antes de llegar a producción.
+						{homeState.t('features.delivery.desc')}
 					</p>
 				</div>
 				<div class="content-section-card">
@@ -197,10 +186,9 @@
 							<path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
 						</svg>
 					</div>
-					<h3 class="content-card-title">Equipos dedicados</h3>
+					<h3 class="content-card-title">{homeState.t('features.teams.title')}</h3>
 					<p class="content-card-description">
-						Un equipo que conoce tu negocio, tu contexto y tus ambiciones. No rotamos personas:
-						construimos relaciones de largo plazo.
+						{homeState.t('features.teams.desc')}
 					</p>
 				</div>
 			</div>
@@ -208,15 +196,15 @@
 	</section>
 
 	<!-- Footer -->
-	<Footer />
+	<Footer state={homeState} />
 </div>
 
 <!-- Modal Overlay -->
-{#if state.activeModal}
+{#if homeState.activeModal}
 	<div 
 		class="modal-backdrop" 
-		onclick={state.closeModal} 
-		onkeydown={(e) => e.key === 'Escape' && state.closeModal()}
+		onclick={homeState.closeModal} 
+		onkeydown={(e) => e.key === 'Escape' && homeState.closeModal()}
 		role="presentation"
 	>
 		<div 
@@ -227,11 +215,11 @@
 			aria-modal="true"
 			tabindex="-1"
 		>
-			<button class="modal-close" onclick={state.closeModal} aria-label="Close modal">✕</button>
-			<h3>{state.activeModal}</h3>
-			<p>Gracias por tu interés en <strong>WYLEN.</strong> Pronto nos pondremos en contacto.</p>
+			<button class="modal-close" onclick={homeState.closeModal} aria-label="Close modal">✕</button>
+			<h3>{homeState.activeModal}</h3>
+			<p>{@html homeState.t('modal.thanks')}</p>
 			<div class="modal-actions">
-				<button class="btn btn-dark" onclick={state.closeModal}>Continuar</button>
+				<button class="btn btn-dark" onclick={homeState.closeModal}>{homeState.t('modal.continue')}</button>
 			</div>
 		</div>
 	</div>

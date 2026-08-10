@@ -57,15 +57,26 @@
 		</div>
 
 		<nav class="nav-links desktop-only" aria-label="Navegación principal">
-			<a href="#bikes" class="nav-item">PROYECTOS</a>
-			<a href="#adaptive-power" class="nav-item">INGENIERÍA</a>
-			<a href="#connect" class="nav-item">NOSOTROS</a>
-			<a href="#care" class="nav-item">CONTACTO</a>
+			<a href="#bikes" class="nav-item">{homeState.t('nav.projects')}</a>
+			<a href="#adaptive-power" class="nav-item">{homeState.t('nav.engineering')}</a>
+			<a href="#connect" class="nav-item">{homeState.t('nav.about')}</a>
+			<a href="#care" class="nav-item">{homeState.t('nav.contact')}</a>
 		</nav>
 
 		<div class="nav-actions">
+			<!-- Language Toggle Switcher -->
+			<button 
+				class="lang-toggle-btn desktop-only" 
+				onclick={() => homeState.setLanguage(homeState.currentLanguage === 'es' ? 'en' : 'es')}
+				aria-label="Cambiar idioma / Switch language"
+			>
+				<span class:active={homeState.currentLanguage === 'es'}>ES</span>
+				<span class="separator">/</span>
+				<span class:active={homeState.currentLanguage === 'en'}>EN</span>
+			</button>
+
 			<button class="order-btn desktop-only" onclick={() => homeState.openModal('Order Now')}>
-				<span>Conversemos</span>
+				<span>{homeState.t('nav.cta')}</span>
 				<svg class="arrow-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 					<path d="M5 12h14M12 5l7 7-7 7"/>
 				</svg>
@@ -93,11 +104,18 @@
 			aria-modal="true" 
 			aria-label="Menú móvil"
 		>
-			<a href="#bikes" onclick={homeState.closeMobileMenu}>Proyectos</a>
-			<a href="#adaptive-power" onclick={homeState.closeMobileMenu}>Ingeniería</a>
-			<a href="#connect" onclick={homeState.closeMobileMenu}>Nosotros</a>
-			<a href="#care" onclick={homeState.closeMobileMenu}>Contacto</a>
-			<a href="#" class="mobile-menu-cta" onclick={(e) => { e.preventDefault(); homeState.closeMobileMenu(); homeState.openModal('Order Now'); }}>Conversemos</a>
+			<a href="#bikes" onclick={homeState.closeMobileMenu}>{homeState.t('nav.projects')}</a>
+			<a href="#adaptive-power" onclick={homeState.closeMobileMenu}>{homeState.t('nav.engineering')}</a>
+			<a href="#connect" onclick={homeState.closeMobileMenu}>{homeState.t('nav.about')}</a>
+			<a href="#care" onclick={homeState.closeMobileMenu}>{homeState.t('nav.contact')}</a>
+			<a href="#" class="mobile-menu-cta" onclick={(e) => { e.preventDefault(); homeState.closeMobileMenu(); homeState.openModal('Order Now'); }}>{homeState.t('nav.cta')}</a>
+
+			<!-- Mobile Language Switcher -->
+			<div class="mobile-lang-switcher">
+				<button class="mobile-lang-btn" onclick={() => { homeState.setLanguage('es'); homeState.closeMobileMenu(); }} class:active={homeState.currentLanguage === 'es'}>Español</button>
+				<span class="mobile-lang-separator">|</span>
+				<button class="mobile-lang-btn" onclick={() => { homeState.setLanguage('en'); homeState.closeMobileMenu(); }} class:active={homeState.currentLanguage === 'en'}>English</button>
+			</div>
 		</div>
 	{/if}
 </header>

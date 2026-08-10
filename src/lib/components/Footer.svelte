@@ -1,46 +1,48 @@
 <script lang="ts">
-    const currentYear = new Date().getFullYear();
+    import type { HomeState } from '$lib/homeState.svelte';
 
-    const footerColumns = [
+    let { state: homeState }: { state: HomeState } = $props();
+
+    const footerColumns = $derived([
         {
-            title: 'Servicios',
+            title: homeState.t('footer.col.services'),
             links: [
-                { label: 'Software empresarial', href: '#' },
-                { label: 'Productos digitales', href: '#' },
-                { label: 'Consultoría técnica', href: '#' },
-                { label: 'Automatización', href: '#' },
-                { label: 'Integraciones', href: '#' }
+                { label: homeState.t('projects.classic.title'), href: '#' },
+                { label: homeState.t('projects.cruiser.title'), href: '#' },
+                { label: homeState.t('footer.service.consulting'), href: '#' },
+                { label: homeState.t('footer.service.automation'), href: '#' },
+                { label: homeState.t('footer.service.integrations'), href: '#' }
             ]
         },
         {
-            title: 'Empresa',
+            title: homeState.t('footer.col.company'),
             links: [
-                { label: 'Nosotros', href: '#' },
-                { label: 'Ingeniería', href: '#' },
-                { label: 'Filosofía', href: '#' },
-                { label: 'Equipo', href: '#' },
-                { label: 'Carreras', href: '#' }
+                { label: homeState.t('footer.company.about'), href: '#' },
+                { label: homeState.t('footer.company.engineering'), href: '#' },
+                { label: homeState.t('footer.company.philosophy'), href: '#' },
+                { label: homeState.t('footer.company.team'), href: '#' },
+                { label: homeState.t('footer.company.careers'), href: '#' }
             ]
         },
         {
-            title: 'Recursos',
+            title: homeState.t('footer.col.resources'),
             links: [
-                { label: 'Blog', href: '#' },
-                { label: 'Casos de estudio', href: '#' },
-                { label: 'Documentación', href: '#' },
-                { label: 'Guías técnicas', href: '#' }
+                { label: homeState.t('footer.resource.blog'), href: '#' },
+                { label: homeState.t('footer.resource.cases'), href: '#' },
+                { label: homeState.t('footer.resource.docs'), href: '#' },
+                { label: homeState.t('footer.resource.guides'), href: '#' }
             ]
         },
         {
-            title: 'Legal',
+            title: homeState.t('footer.col.legal'),
             links: [
-                { label: 'Privacidad', href: '#' },
-                { label: 'Términos de uso', href: '#' },
-                { label: 'Responsable AI', href: '#' },
-                { label: 'Seguridad', href: '#' }
+                { label: homeState.t('footer.legal.privacy'), href: '#' },
+                { label: homeState.t('footer.legal.terms'), href: '#' },
+                { label: homeState.t('footer.legal.ai'), href: '#' },
+                { label: homeState.t('footer.legal.security'), href: '#' }
             ]
         }
-    ];
+    ]);
 </script>
 
 <footer class="site-footer">
@@ -49,7 +51,7 @@
         <div class="footer-top">
             <div class="footer-brand">
                 <span class="footer-logo">WYLEN</span>
-                <p class="footer-tagline">Engineering that inspires.</p>
+                <p class="footer-tagline">{homeState.t('footer.tagline')}</p>
             </div>
 
             <div class="footer-columns">
@@ -71,7 +73,7 @@
 
         <!-- Bottom row: copyright + social -->
         <div class="footer-bottom">
-            <p class="footer-copyright">© {currentYear} Wylen. Todos los derechos reservados.</p>
+            <p class="footer-copyright">{homeState.t('footer.copyright')}</p>
 
             <div class="footer-social">
                 <!-- LinkedIn -->
