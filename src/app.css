@@ -1,0 +1,54 @@
+:root {
+	--bg-sand: #e5dccb;
+	--bg-sand-light: #ece3d4;
+	--bg-taupe: #c9bea9;
+	--bg-dark: #1b1c19;
+	--bg-darker: #131412;
+	--text-dark: #121211;
+	--text-muted: #5e5a52;
+	--text-light: #f5f2eb;
+	--text-dim-light: #a3a098;
+	--font-interface: 'Manrope', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+	--font-brand: 'Switzer', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+*, *::before, *::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html, body {
+	font-family: var(--font-interface);
+	background-color: var(--bg-sand);
+	color: var(--text-dark);
+	overflow-x: clip;
+	scroll-behavior: smooth;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	scrollbar-gutter: stable;
+}
+
+button {
+	font-family: inherit;
+	cursor: pointer;
+	border: none;
+	background: none;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+	width: 8px;
+}
+::-webkit-scrollbar-track {
+	background: var(--bg-sand);
+}
+::-webkit-scrollbar-thumb {
+	background: #b5aa97;
+	border-radius: 4px;
+}
