@@ -7,21 +7,21 @@
         {
             title: homeState.t('footer.col.services'),
             links: [
-                { label: homeState.t('projects.classic.title'), href: '#' },
-                { label: homeState.t('projects.cruiser.title'), href: '#' },
-                { label: homeState.t('footer.service.consulting'), href: '#' },
-                { label: homeState.t('footer.service.automation'), href: '#' },
-                { label: homeState.t('footer.service.integrations'), href: '#' }
+                { label: homeState.t('projects.classic.title'), href: '/servicios/software-empresarial' },
+                { label: homeState.t('projects.cruiser.title'), href: '/servicios/productos-digitales' },
+                { label: homeState.t('footer.service.consulting'), href: '/servicios/consultoria-tecnica' },
+                { label: homeState.t('footer.service.automation'), href: '/servicios/automatizacion' },
+                { label: homeState.t('footer.service.integrations'), href: '/servicios/integraciones' }
             ]
         },
         {
             title: homeState.t('footer.col.company'),
             links: [
-                { label: homeState.t('footer.company.about'), href: '#' },
-                { label: homeState.t('footer.company.engineering'), href: '#' },
-                { label: homeState.t('footer.company.philosophy'), href: '#' },
-                { label: homeState.t('footer.company.team'), href: '#' },
-                { label: homeState.t('footer.company.careers'), href: '#' }
+                { label: homeState.t('footer.company.about'), href: '/empresa/nosotros' },
+                { label: homeState.t('footer.company.engineering'), href: '/empresa/ingenieria' },
+                { label: homeState.t('footer.company.philosophy'), href: '/empresa/filosofia' },
+                { label: homeState.t('footer.company.team'), href: '/empresa/equipo' },
+                { label: homeState.t('footer.company.careers'), href: '/empresa/carreras' }
             ]
         },
         {

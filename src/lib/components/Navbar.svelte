@@ -52,15 +52,15 @@
 
 <header class="navbar-wrapper">
 	<div class="navbar">
-		<div class="nav-brand">
+		<a href="/" class="nav-brand">
 			<Logo />
-		</div>
+		</a>
 
 		<nav class="nav-links desktop-only" aria-label="Navegación principal">
-			<a href="#bikes" class="nav-item">{homeState.t('nav.projects')}</a>
-			<a href="#adaptive-power" class="nav-item">{homeState.t('nav.engineering')}</a>
-			<a href="#connect" class="nav-item">{homeState.t('nav.about')}</a>
-			<a href="#care" class="nav-item">{homeState.t('nav.contact')}</a>
+			<a href="/#bikes" class="nav-item">{homeState.t('nav.projects')}</a>
+			<a href="/#adaptive-power" class="nav-item">{homeState.t('nav.engineering')}</a>
+			<a href="/#connect" class="nav-item">{homeState.t('nav.about')}</a>
+			<a href="/#care" class="nav-item">{homeState.t('nav.contact')}</a>
 		</nav>
 
 		<div class="nav-actions">
@@ -104,10 +104,10 @@
 			aria-modal="true" 
 			aria-label="Menú móvil"
 		>
-			<a href="#bikes" onclick={homeState.closeMobileMenu}>{homeState.t('nav.projects')}</a>
-			<a href="#adaptive-power" onclick={homeState.closeMobileMenu}>{homeState.t('nav.engineering')}</a>
-			<a href="#connect" onclick={homeState.closeMobileMenu}>{homeState.t('nav.about')}</a>
-			<a href="#care" onclick={homeState.closeMobileMenu}>{homeState.t('nav.contact')}</a>
+			<a href="/#bikes" onclick={homeState.closeMobileMenu}>{homeState.t('nav.projects')}</a>
+			<a href="/#adaptive-power" onclick={homeState.closeMobileMenu}>{homeState.t('nav.engineering')}</a>
+			<a href="/#connect" onclick={homeState.closeMobileMenu}>{homeState.t('nav.about')}</a>
+			<a href="/#care" onclick={homeState.closeMobileMenu}>{homeState.t('nav.contact')}</a>
 			<a href="#" class="mobile-menu-cta" onclick={(e) => { e.preventDefault(); homeState.closeMobileMenu(); homeState.openModal('Order Now'); }}>{homeState.t('nav.cta')}</a>
 
 			<!-- Mobile Language Switcher -->
