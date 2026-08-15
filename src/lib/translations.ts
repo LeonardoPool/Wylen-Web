@@ -1,11 +1,37 @@
 export const translations = {
 	es: {
 		// Navbar
+		'nav.services': 'SERVICIOS',
+		'nav.company': 'EMPRESA',
 		'nav.projects': 'PROYECTOS',
-		'nav.engineering': 'INGENIERÍA',
-		'nav.about': 'NOSOTROS',
 		'nav.contact': 'CONTACTO',
 		'nav.cta': 'Conversemos',
+
+		// Mega Menu — Servicios
+		'mega.services.label': 'NUESTROS SERVICIOS',
+		'mega.services.enterprise.title': 'Software empresarial',
+		'mega.services.enterprise.desc': 'Plataformas diseñadas para crecer con tu negocio.',
+		'mega.services.digital.title': 'Productos digitales',
+		'mega.services.digital.desc': 'Aplicaciones rápidas, intuitivas y construidas para durar.',
+		'mega.services.consulting.title': 'Consultoría técnica',
+		'mega.services.consulting.desc': 'Análisis estratégico y arquitectura de soluciones.',
+		'mega.services.automation.title': 'Automatización',
+		'mega.services.automation.desc': 'Procesos optimizados que funcionan sin intervención manual.',
+		'mega.services.integrations.title': 'Integraciones',
+		'mega.services.integrations.desc': 'Conectamos tus herramientas para que trabajen como una sola.',
+
+		// Mega Menu — Empresa
+		'mega.company.label': 'CONÓCENOS',
+		'mega.company.about.title': 'Nosotros',
+		'mega.company.about.desc': 'Quiénes somos y por qué hacemos lo que hacemos.',
+		'mega.company.engineering.title': 'Ingeniería',
+		'mega.company.engineering.desc': 'Nuestro enfoque técnico y rigor estructural.',
+		'mega.company.philosophy.title': 'Filosofía',
+		'mega.company.philosophy.desc': 'Los principios que guían cada decisión.',
+		'mega.company.team.title': 'Equipo',
+		'mega.company.team.desc': 'Personas dedicadas que entienden tu contexto.',
+		'mega.company.careers.title': 'Carreras',
+		'mega.company.careers.desc': 'Únete a construir tecnología con propósito.',
 
 		// Hero
 		'hero.title': 'Engineering that inspires.',
@@ -96,11 +122,37 @@ export const translations = {
 	},
 	en: {
 		// Navbar
+		'nav.services': 'SERVICES',
+		'nav.company': 'COMPANY',
 		'nav.projects': 'PROJECTS',
-		'nav.engineering': 'ENGINEERING',
-		'nav.about': 'ABOUT US',
 		'nav.contact': 'CONTACT',
 		'nav.cta': "Let's Chat",
+
+		// Mega Menu — Servicios
+		'mega.services.label': 'OUR SERVICES',
+		'mega.services.enterprise.title': 'Enterprise Software',
+		'mega.services.enterprise.desc': 'Platforms designed to grow with your business.',
+		'mega.services.digital.title': 'Digital Products',
+		'mega.services.digital.desc': 'Fast, intuitive applications built to last.',
+		'mega.services.consulting.title': 'Technical Consulting',
+		'mega.services.consulting.desc': 'Strategic analysis and solution architecture.',
+		'mega.services.automation.title': 'Automation',
+		'mega.services.automation.desc': 'Optimized processes that run without manual intervention.',
+		'mega.services.integrations.title': 'Integrations',
+		'mega.services.integrations.desc': 'We connect your tools so they work as one.',
+
+		// Mega Menu — Empresa
+		'mega.company.label': 'GET TO KNOW US',
+		'mega.company.about.title': 'About Us',
+		'mega.company.about.desc': 'Who we are and why we do what we do.',
+		'mega.company.engineering.title': 'Engineering',
+		'mega.company.engineering.desc': 'Our technical approach and structural rigor.',
+		'mega.company.philosophy.title': 'Philosophy',
+		'mega.company.philosophy.desc': 'The principles that guide every decision.',
+		'mega.company.team.title': 'Team',
+		'mega.company.team.desc': 'Dedicated people who understand your context.',
+		'mega.company.careers.title': 'Careers',
+		'mega.company.careers.desc': 'Join us in building technology with purpose.',
 
 		// Hero
 		'hero.title': 'Engineering that inspires.',

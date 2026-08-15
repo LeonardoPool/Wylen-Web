@@ -50,7 +50,7 @@
 	</section>
 
 	<!-- Two-Column Bike Grid (Classic & Cruiser) -->
-	<section id="bikes" class="bike-cards-section">
+	<section id="proyectos" class="bike-cards-section">
 		<div class="bike-grid">
 			<!-- Classic Card (Dark Charcoal) -->
 			<div class="bike-card card-dark">
@@ -104,7 +104,7 @@
 		</div>
 	</section>
 
-	<section id="connect" class="app-promo-section">
+	<section id="nosotros" class="app-promo-section">
 		<div class="graph-section-wrapper" style="position: relative; width: 100vw; margin-left: calc(-50vw + 50%); display: flex; align-items: center; justify-content: center;">
 			<Graph state={homeState} />
 		</div>
