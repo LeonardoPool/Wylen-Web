@@ -12,7 +12,6 @@ const SPANISH_COUNTRIES = new Set([
 
 export class HomeState {
 	isMobileMenuOpen = $state(false);
-	activeModal = $state<string | null>(null);
 	isPlayingVideo = $state(false);
 	currentLanguage = $state<'es' | 'en'>('es');
 	activeDropdown = $state<string | null>(null);
@@ -68,14 +67,6 @@ export class HomeState {
 			translated = translated.replace('{year}', new Date().getFullYear().toString());
 		}
 		return translated;
-	};
-
-	openModal = (modalName: string) => {
-		this.activeModal = modalName;
-	};
-
-	closeModal = () => {
-		this.activeModal = null;
 	};
 
 	toggleVideo = () => {

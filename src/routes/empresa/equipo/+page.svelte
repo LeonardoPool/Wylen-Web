@@ -199,7 +199,7 @@
 		<h2 class="page-cta-title">Need a dedicated team for your project?</h2>
 		<p class="page-cta-text">Let's talk about how we can integrate to solve your business problems.</p>
 	{/if}
-	<button class="page-cta-btn" onclick={() => homeState.openModal('Equipo')}>
+	<a href="/contacto" class="page-cta-btn">
 		{lang === 'es' ? 'Conversemos' : "Let's talk"}
-	</button>
+	</a>
 </section>

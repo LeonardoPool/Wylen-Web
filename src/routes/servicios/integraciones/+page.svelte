@@ -201,7 +201,7 @@
 		<h2 class="page-cta-title">Are your tools operating in isolated silos?</h2>
 		<p class="page-cta-text">Let's talk about interconnecting your systems to unify control of your business.</p>
 	{/if}
-	<button class="page-cta-btn" onclick={() => homeState.openModal('Integraciones')}>
+	<a href="/contacto" class="page-cta-btn">
 		{lang === 'es' ? 'Escribir a Wylen' : 'Write to Wylen'}
-	</button>
+	</a>
 </section>

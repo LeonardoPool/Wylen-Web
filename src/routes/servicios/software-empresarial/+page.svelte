@@ -176,7 +176,7 @@
 		<h2 class="page-cta-title">Does your operation need a better system?</h2>
 		<p class="page-cta-text">Let's talk about what could improve. No commitment, no unnecessary jargon.</p>
 	{/if}
-	<button class="page-cta-btn" onclick={() => homeState.openModal('Conversemos')}>
+	<a href="/contacto" class="page-cta-btn">
 		{lang === 'es' ? 'Conversemos' : "Let's talk"}
-	</button>
+	</a>
 </section>

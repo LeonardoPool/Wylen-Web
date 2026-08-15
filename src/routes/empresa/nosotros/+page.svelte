@@ -251,9 +251,9 @@
 						? 'Conversemos sobre cómo optimizar tus procesos, eliminar tareas repetitivas y centralizar tu información.'
 						: 'Let\'s talk about optimizing your processes, eliminating repetitive tasks, and centralizing your data.'}
 				</p>
-				<button class="btn btn-dark" onclick={() => homeState.openModal('Conversemos')}>
+				<a href="/contacto" class="btn btn-dark">
 					{lang === 'es' ? 'Escribir a Wylen' : 'Write to Wylen'}
-				</button>
+				</a>
 			</div>
 		</div>
 	</div>

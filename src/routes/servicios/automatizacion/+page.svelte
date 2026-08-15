@@ -180,7 +180,7 @@
 		<h2 class="page-cta-title">Ready to free up your team's attention?</h2>
 		<p class="page-cta-text">Let's talk about which manual processes in your operation we can automate today.</p>
 	{/if}
-	<button class="page-cta-btn" onclick={() => homeState.openModal('Automatización')}>
+	<a href="/contacto" class="page-cta-btn">
 		{lang === 'es' ? 'Escribir a Wylen' : 'Write to Wylen'}
-	</button>
+	</a>
 </section>

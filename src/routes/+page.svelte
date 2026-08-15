@@ -33,12 +33,12 @@
 					{homeState.t('hero.subtitle')}
 				</p>
 				<div class="hero-buttons">
-					<button class="btn btn-dark" onclick={() => homeState.openModal('Explore Models')}>
+					<a href="/contacto" class="btn btn-dark">
 						{homeState.t('hero.cta.talk')}
-					</button>
-					<button class="btn btn-light" onclick={() => homeState.openModal('Book Your Ride')}>
+					</a>
+					<a href="/proyectos" class="btn btn-light">
 						{homeState.t('hero.cta.work')}
-					</button>
+					</a>
 				</div>
 			</div>
 
@@ -60,9 +60,9 @@
 					<p class="card-description">
 						{homeState.t('projects.classic.desc')}
 					</p>
-					<button class="btn btn-pill-sand" onclick={() => homeState.openModal('Book Your Ride - Classic')}>
+					<a href="/servicios/software-empresarial" class="btn btn-pill-sand">
 						{homeState.t('projects.more')}
-					</button>
+					</a>
 				</div>
 			</div>
 
@@ -74,9 +74,9 @@
 					<p class="card-description">
 						{homeState.t('projects.cruiser.desc')}
 					</p>
-					<button class="btn btn-pill-sand" onclick={() => homeState.openModal('Book Your Ride - Cruiser')}>
+					<a href="/servicios/productos-digitales" class="btn btn-pill-sand">
 						{homeState.t('projects.more')}
-					</button>
+					</a>
 				</div>
 			</div>
 		</div>
@@ -198,29 +198,3 @@
 	<!-- Footer -->
 	<Footer state={homeState} />
 </div>
-
-<!-- Modal Overlay -->
-{#if homeState.activeModal}
-	<div 
-		class="modal-backdrop" 
-		onclick={homeState.closeModal} 
-		onkeydown={(e) => e.key === 'Escape' && homeState.closeModal()}
-		role="presentation"
-	>
-		<div 
-			class="modal-content" 
-			onclick={(e) => e.stopPropagation()} 
-			onkeydown={(e) => e.stopPropagation()}
-			role="dialog" 
-			aria-modal="true"
-			tabindex="-1"
-		>
-			<button class="modal-close" onclick={homeState.closeModal} aria-label="Close modal">✕</button>
-			<h3>{homeState.activeModal}</h3>
-			<p>{@html homeState.t('modal.thanks')}</p>
-			<div class="modal-actions">
-				<button class="btn btn-dark" onclick={homeState.closeModal}>{homeState.t('modal.continue')}</button>
-			</div>
-		</div>
-	</div>
-{/if}

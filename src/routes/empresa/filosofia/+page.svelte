@@ -230,9 +230,9 @@
 			</div>
 			<div style="display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 1.5rem;">
 				<h3 style="font-size: 1.8rem; font-weight: 700; color: var(--text-light);">{lang === 'es' ? '¿Quieres ver nuestra filosofía en acción?' : 'Want to see our philosophy in action?'}</h3>
-				<button class="btn btn-pill-sand" onclick={() => homeState.openModal('Filosofía')}>
+				<a href="/contacto" class="btn btn-pill-sand">
 					{lang === 'es' ? 'Trabajar con Wylen' : 'Work with Wylen'}
-				</button>
+				</a>
 			</div>
 		</div>
 	</div>

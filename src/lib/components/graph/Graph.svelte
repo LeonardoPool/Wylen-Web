@@ -162,9 +162,9 @@
             <p class="graph-flow-subtitle">
                 {homeState.t('Escuchamos antes de diseñar. Diseñamos antes de desarrollar.')}
             </p>
-            <button class="btn graph-flow-btn" onclick={() => homeState.openModal('Discover App')}>
+            <a href="/empresa/filosofia" class="btn graph-flow-btn">
                 {homeState.t('graph.mobile.btn')}
-            </button>
+            </a>
         </div>
 
         <div class="graph-flow-questions">
@@ -207,9 +207,9 @@
             <p class="graph-overlay-subtitle">
                 {homeState.t('Escuchamos antes de diseñar. Diseñamos antes de desarrollar.')}
             </p>
-            <button class="btn graph-overlay-btn" onclick={() => homeState.openModal('Discover App')}>
+            <a href="/empresa/filosofia" class="btn graph-overlay-btn">
                 {homeState.t('graph.mobile.btn')}
-            </button>
+            </a>
         </div>
     </div>
 {/if}

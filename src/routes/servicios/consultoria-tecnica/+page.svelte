@@ -174,9 +174,9 @@
 			</div>
 			<div style="display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 1.5rem;">
 				<h3 style="font-size: 1.8rem; font-weight: 700; color: var(--text-light);">{lang === 'es' ? '¿Dudas sobre tu dirección tecnológica?' : 'Doubts about your technical direction?'}</h3>
-				<button class="btn btn-pill-sand" onclick={() => homeState.openModal('Consultoría')}>
+				<a href="/contacto" class="btn btn-pill-sand">
 					{lang === 'es' ? 'Agendar consulta' : 'Schedule consultation'}
-				</button>
+				</a>
 			</div>
 		</div>
 	</div>

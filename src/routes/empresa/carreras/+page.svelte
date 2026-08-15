@@ -221,8 +221,8 @@
 				? 'No envíes un currículum genérico. Cuéntanos sobre algo que hayas construido de lo que te sientas orgulloso, o sobre un problema técnico que hayas resuelto.'
 				: 'Don\'t send a generic résumé. Tell us about something you built that you are proud of, or about a technical problem you solved.'}
 		</p>
-		<button class="page-cta-btn" onclick={() => homeState.openModal('Carreras')}>
+		<a href="/contacto" class="page-cta-btn">
 			{lang === 'es' ? 'Conversemos' : "Let's talk"}
-		</button>
+		</a>
 	</div>
 </section>

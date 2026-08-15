@@ -40,6 +40,30 @@
 		}
 	});
 
+	// Auto-close menu and dropdowns on route navigation
+	$effect(() => {
+		const href = $page.url.href;
+		homeState.closeMobileMenu();
+		homeState.closeDropdown();
+	});
+
+	// Click outside handler for mobile menu and dropdowns
+	function handleWindowClick(event: MouseEvent) {
+		const target = event.target as HTMLElement;
+		// Close mobile menu if clicked outside
+		if (homeState.isMobileMenuOpen && mobileMenuContainer && !mobileMenuContainer.contains(target)) {
+			if (!target.closest('.mobile-menu-toggle')) {
+				homeState.closeMobileMenu();
+			}
+		}
+		// Close desktop dropdowns if clicked outside
+		if (homeState.activeDropdown) {
+			if (!target.closest('.nav-dropdown-wrapper') && !target.closest('.mega-menu-panel')) {
+				homeState.closeDropdown();
+			}
+		}
+	}
+
 	// Desktop mega menu hover handlers with delay
 	function handleDropdownEnter(name: string) {
 		if (closeTimer) clearTimeout(closeTimer);
@@ -106,7 +130,7 @@
 	}
 </script>
 
-<svelte:window onkeydown={handleKeydown} />
+<svelte:window onkeydown={handleKeydown} onclick={handleWindowClick} />
 
 <header class="navbar-wrapper">
 	<div class="navbar">
@@ -159,8 +183,8 @@
 				</button>
 			</div>
 
-			<a href="/#proyectos" class="nav-item">{homeState.t('nav.projects')}</a>
-			<button class="nav-item" onclick={() => homeState.openModal('Contacto')}>{homeState.t('nav.contact')}</button>
+			<a href="/proyectos" class="nav-item">{homeState.t('nav.projects')}</a>
+			<a href="/contacto" class="nav-item">{homeState.t('nav.contact')}</a>
 		</nav>
 
 		<div class="nav-actions">
@@ -175,12 +199,12 @@
 				<span class:active={homeState.currentLanguage === 'en'}>EN</span>
 			</button>
 
-			<button class="order-btn desktop-only" onclick={() => homeState.openModal('Order Now')}>
+			<a href="/contacto" class="order-btn desktop-only">
 				<span>{homeState.t('nav.cta')}</span>
 				<svg class="arrow-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 					<path d="M5 12h14M12 5l7 7-7 7"/>
 				</svg>
-			</button>
+			</a>
 
 			<button 
 				class="mobile-menu-toggle mobile-only" 
@@ -319,10 +343,10 @@
 				{/if}
 			</div>
 
-			<a href="/#proyectos" onclick={homeState.closeMobileMenu}>{homeState.t('nav.projects')}</a>
-			<button class="mobile-contact-link" onclick={() => { homeState.closeMobileMenu(); homeState.openModal('Contacto'); }}>{homeState.t('nav.contact')}</button>
+			<a href="/proyectos" onclick={homeState.closeMobileMenu}>{homeState.t('nav.projects')}</a>
+			<a href="/contacto" class="mobile-contact-link" onclick={homeState.closeMobileMenu}>{homeState.t('nav.contact')}</a>
 			
-			<a href="#" class="mobile-menu-cta" onclick={(e) => { e.preventDefault(); homeState.closeMobileMenu(); homeState.openModal('Order Now'); }}>{homeState.t('nav.cta')}</a>
+			<a href="/contacto" class="mobile-menu-cta" onclick={homeState.closeMobileMenu}>{homeState.t('nav.cta')}</a>
 
 			<!-- Mobile Language Switcher -->
 			<div class="mobile-lang-switcher">

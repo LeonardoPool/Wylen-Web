@@ -219,9 +219,9 @@
 			</div>
 			<div style="display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 1.5rem;">
 				<h3 style="font-size: 1.8rem; font-weight: 700; color: var(--text-dark);">{lang === 'es' ? 'Hablemos de código con intención' : 'Let\'s talk about code with intention'}</h3>
-				<button class="btn btn-dark" onclick={() => homeState.openModal('Ingeniería')}>
+				<a href="/contacto" class="btn btn-dark">
 					{lang === 'es' ? 'Escribir a Wylen' : 'Write to Wylen'}
-				</button>
+				</a>
 			</div>
 		</div>
 	</div>

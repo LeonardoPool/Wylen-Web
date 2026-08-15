@@ -192,7 +192,7 @@
 		<h2 class="page-cta-title">Have an idea that needs to become a product?</h2>
 		<p class="page-cta-text">We can help you turn that idea into something functional, useful, and well built.</p>
 	{/if}
-	<button class="page-cta-btn" onclick={() => homeState.openModal('Conversemos')}>
+	<a href="/contacto" class="page-cta-btn">
 		{lang === 'es' ? 'Conversemos' : "Let's talk"}
-	</button>
+	</a>
 </section>
