@@ -34,7 +34,7 @@ export const translations = {
 		'mega.company.careers.desc': 'Únete a construir tecnología con propósito.',
 
 		// Hero
-		'hero.title': 'Engineering that inspires.',
+		'hero.title': 'Ingeniería que inspira.',
 		'hero.subtitle': 'Construimos herramientas digitales que impulsan el crecimiento de las personas y las organizaciones.',
 		'hero.cta.talk': 'Conversemos',
 		'hero.cta.work': 'Nuestro trabajo',
@@ -89,7 +89,7 @@ export const translations = {
 		'modal.continue': 'Continuar',
 
 		// Footer columns & items
-		'footer.tagline': 'Engineering that inspires.',
+		'footer.tagline': 'Ingeniería que inspira.',
 		'footer.col.services': 'Servicios',
 		'footer.col.company': 'Empresa',
 		'footer.col.resources': 'Recursos',
