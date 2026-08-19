@@ -32,6 +32,8 @@ export const translations = {
 		'mega.company.team.desc': 'Personas dedicadas que entienden tu contexto.',
 		'mega.company.careers.title': 'Carreras',
 		'mega.company.careers.desc': 'Únete a construir tecnología con propósito.',
+		'mega.company.blog.title': 'Blog & Ideas',
+		'mega.company.blog.desc': 'Artículos sobre ingeniería, inteligencia artificial y diseño con propósito.',
 
 		// Hero
 		'hero.title': 'Ingeniería que inspira.',
@@ -210,6 +212,8 @@ export const translations = {
 		'mega.company.team.desc': 'Dedicated people who understand your context.',
 		'mega.company.careers.title': 'Careers',
 		'mega.company.careers.desc': 'Join us in building technology with purpose.',
+		'mega.company.blog.title': 'Blog & Insights',
+		'mega.company.blog.desc': 'Articles on engineering, artificial intelligence, and purposeful design.',
 
 		// Hero
 		'hero.title': 'Engineering that inspires.',

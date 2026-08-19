@@ -28,7 +28,8 @@
 		{ key: 'engineering', href: '/empresa/ingenieria', icon: 'settings' },
 		{ key: 'philosophy', href: '/empresa/filosofia', icon: 'book' },
 		{ key: 'team', href: '/empresa/equipo', icon: 'heart' },
-		{ key: 'careers', href: '/empresa/carreras', icon: 'briefcase' }
+		{ key: 'careers', href: '/empresa/carreras', icon: 'briefcase' },
+		{ key: 'blog', href: '/empresa/blog', icon: 'book-open' }
 	];
 
 	// Body scroll lock effect
@@ -282,6 +283,8 @@
 									<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
 								{:else if item.icon === 'briefcase'}
 									<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+								{:else if item.icon === 'book-open'}
+									<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
 								{/if}
 							</div>
 							<div class="mega-item-text">
