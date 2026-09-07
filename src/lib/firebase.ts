@@ -17,6 +17,39 @@ export const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 // Initialize Firestore Database instance
 export const db = getFirestore(app);
 
+// Interfaces for Dynamic Body Blocks & Secondary Collections
+export interface BlockContent {
+	id: string;
+	type: 'text' | 'image' | 'quote' | 'editorial-section' | 'chart' | string;
+	data: Record<string, any>;
+}
+
+export interface PostImage {
+	url: string;
+	alt?: string;
+	caption?: string;
+	isCover?: boolean;
+}
+
+export interface ChartItem {
+	type: 'bar' | 'line' | 'pie';
+	title?: string;
+	caption?: string;
+	labels: string[];
+	values: number[];
+}
+
+export interface ExternalLink {
+	label: string;
+	url: string;
+}
+
+export interface CoverImageObj {
+	url: string;
+	alt?: string;
+	caption?: string;
+}
+
 // Data structure for Blog Articles
 export interface BlogPost {
 	id: string;
@@ -37,14 +70,20 @@ export interface BlogPost {
 		role_en?: string;
 		avatar?: string;
 	};
+	publishedAt?: any;
 	date: string;
 	date_en?: string;
 	readTime: string;
 	readTime_en?: string;
 	likes: number;
+	likesCount?: number;
 	featured?: boolean;
-	coverImage?: string;
+	coverImage?: CoverImageObj | string;
 	tags?: string[];
+	body?: BlockContent[];
+	images?: PostImage[];
+	charts?: ChartItem[];
+	externalLinks?: ExternalLink[];
 }
 
 /**
@@ -243,6 +282,7 @@ export const MOCK_BLOG_POSTS: BlogPost[] = [
 		},
 		date: '12 de Agosto, 2026',
 		readTime: '4 min de lectura',
+		likes: 12,
 		featured: false,
 		tags: ['Ingeniería', 'Arquitectura', 'Performance'],
 		content: `
@@ -268,6 +308,7 @@ export const MOCK_BLOG_POSTS: BlogPost[] = [
 		},
 		date: '5 de Agosto, 2026',
 		readTime: '5 min de lectura',
+		likes: 8,
 		featured: false,
 		tags: ['Automatización', 'Diseño Humano', 'Estrategia'],
 		content: `
@@ -290,6 +331,7 @@ export const MOCK_BLOG_POSTS: BlogPost[] = [
 		},
 		date: '28 de Julio, 2026',
 		readTime: '4 min de lectura',
+		likes: 15,
 		featured: false,
 		tags: ['Diseño UI/UX', 'Tipografía', 'Sistemas de Diseño'],
 		content: `
@@ -308,10 +350,10 @@ function parseTimestamp(ts: any): string {
 	if (!ts) return '';
 	if (typeof ts === 'string') return ts;
 	if (typeof ts.toDate === 'function') {
-		return ts.toDate().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+		return ts.toDate().toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' });
 	}
 	if (typeof ts.seconds === 'number') {
-		return new Date(ts.seconds * 1000).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+		return new Date(ts.seconds * 1000).toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' });
 	}
 	return String(ts);
 }
@@ -344,8 +386,8 @@ function parseBodyBlocks(body: any): string {
 				if (!imgUrl) return '';
 				return `
 					<figure class="article-image-block" style="margin: 2rem 0;">
-						<img src="${imgUrl}" alt="${altText}" loading="lazy" style="width:100%; height:auto; border-radius:14px; border: 1px solid var(--blog-border); display: block;" />
-						${caption ? `<figcaption style="text-align:center; font-size:0.85rem; color:var(--blog-text-muted); margin-top:0.6rem;">${caption}</figcaption>` : ''}
+						<img src="${imgUrl}" alt="${altText}" loading="lazy" style="width:100%; height:auto; border-radius:10px; border: 1px solid var(--blog-border); display: block;" />
+						${caption ? `<figcaption style="text-align:center; font-style:italic; font-size:0.85rem; color:#73726C; margin-top:0.6rem;">${caption}</figcaption>` : ''}
 					</figure>
 				`;
 			}
@@ -354,9 +396,9 @@ function parseBodyBlocks(body: any): string {
 				const quoteText = data.text || data.quote || '';
 				const quoteAuthor = data.author || data.autor || '';
 				return `
-					<blockquote class="article-quote-block">
+					<blockquote class="anthropic-quote" style="border-left: 3px solid #D97757; padding: 0.75rem 1.25rem; font-family: Georgia, serif; font-style: italic;">
 						<p>«${quoteText}»</p>
-						${quoteAuthor ? `<cite style="display:block; margin-top:0.5rem; font-style:normal; font-weight:600; font-size:0.9rem; color:var(--blog-accent);">— ${quoteAuthor}</cite>` : ''}
+						${quoteAuthor ? `<cite style="display:block; margin-top:0.5rem; font-style:normal; font-weight:600; font-size:0.9rem; color:#D97757;">— ${quoteAuthor}</cite>` : ''}
 					</blockquote>
 				`;
 			}
@@ -392,6 +434,9 @@ function parseFirestoreDoc(docId: string, data: any): BlogPost {
 	const subtitle = parseContentField(data.subtitle || data.subtitulo || data.summary || data.resumen || data.bajada || '');
 	const rawExcerpt = data.excerpt || data.extracto || data.description || data.descripcion || data.resumen || data.intro || '';
 	
+	// Structured body blocks
+	const body: BlockContent[] | undefined = Array.isArray(data.body) ? data.body : undefined;
+
 	// Parse structured body blocks array or raw content string
 	const content = data.body ? parseBodyBlocks(data.body) : parseContentField(data.content || data.contenido || data.text || rawExcerpt);
 	
@@ -424,23 +469,42 @@ function parseFirestoreDoc(docId: string, data: any): BlogPost {
 	}
 
 	// Date parsing (publishedAt -> createdAt -> date -> fecha)
-	let dateStr = parseTimestamp(data.publishedAt) || parseTimestamp(data.createdAt) || data.date || data.fecha || '18 de Agosto, 2026';
+	const publishedAt = data.publishedAt || data.createdAt;
+	let dateStr = parseTimestamp(publishedAt) || data.date || data.fecha || '7 de septiembre de 2026';
 
 	const readTime = data.readTime || data.tiempoLectura || data.tiempo_lectura || data.read_time || '5 min de lectura';
 	const slug = data.slug || docId;
 	const featured = Boolean(data.featured || data.destacado);
 	const tags = Array.isArray(data.tags) ? data.tags : (Array.isArray(data.etiquetas) ? data.etiquetas : ['Wylen']);
 
-	// Cover Image extraction (map with url vs string vs images array)
-	let coverImage = '';
+	// Cover Image extraction (object or string)
+	let coverImage: any = undefined;
 	if (data.coverImage) {
-		if (typeof data.coverImage === 'string') coverImage = data.coverImage;
-		else if (typeof data.coverImage === 'object' && data.coverImage.url) coverImage = data.coverImage.url;
+		if (typeof data.coverImage === 'string') {
+			coverImage = { url: data.coverImage, alt: title, caption: '' };
+		} else if (typeof data.coverImage === 'object' && data.coverImage.url) {
+			coverImage = {
+				url: data.coverImage.url,
+				alt: data.coverImage.alt || title,
+				caption: data.coverImage.caption || ''
+			};
+		}
 	}
-	if (!coverImage && Array.isArray(data.images)) {
+	if (!coverImage && Array.isArray(data.images) && data.images.length > 0) {
 		const coverImg = data.images.find((img: any) => img.isCover) || data.images[0];
-		if (coverImg && coverImg.url) coverImage = coverImg.url;
+		if (coverImg && coverImg.url) {
+			coverImage = {
+				url: coverImg.url,
+				alt: coverImg.alt || title,
+				caption: coverImg.caption || ''
+			};
+		}
 	}
+
+	// Extract secondary collections
+	const images: PostImage[] | undefined = Array.isArray(data.images) ? data.images : undefined;
+	const charts: ChartItem[] | undefined = Array.isArray(data.charts) ? data.charts : undefined;
+	const externalLinks: ExternalLink[] | undefined = Array.isArray(data.externalLinks) ? data.externalLinks : undefined;
 
 	// Extract likes count (defaults to 0 if missing)
 	const likes = typeof data.likes === 'number'
@@ -456,12 +520,18 @@ function parseFirestoreDoc(docId: string, data: any): BlogPost {
 		content,
 		category,
 		author,
+		publishedAt,
 		date: dateStr,
 		readTime,
 		likes,
+		likesCount: likes,
 		featured,
 		coverImage,
-		tags
+		tags,
+		body,
+		images,
+		charts,
+		externalLinks
 	};
 }
 

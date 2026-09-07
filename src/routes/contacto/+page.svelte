@@ -14,8 +14,22 @@
 		homeState.initLanguage();
 	});
 
+	interface Props {
+		form?: {
+			success?: boolean;
+			error?: string;
+			fields?: {
+				nombre?: string;
+				email?: string;
+				empresa?: string;
+				consulta?: string;
+				mensaje?: string;
+			};
+		} | null;
+	}
+
 	// SvelteKit form action result props
-	let { form } = $props();
+	let { form }: Props = $props();
 	
 	let isSubmitting = $state(false);
 	let successContainer = $state<HTMLDivElement | null>(null);
