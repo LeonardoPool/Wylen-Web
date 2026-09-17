@@ -2,11 +2,15 @@
 	import rawFavicon from '$lib/images/app/ISOTIPO WILEN.png';
 	import '../app.css';
 	import { onMount } from 'svelte';
+	import { afterNavigate } from '$app/navigation';
+	import { initGA, trackPageView } from '$lib/analytics';
 
 	let { children } = $props();
 	let favicon = $state(rawFavicon);
 
 	onMount(() => {
+		initGA();
+
 		const img = new Image();
 		img.src = rawFavicon;
 		img.onload = () => {
@@ -30,6 +34,12 @@
 				favicon = canvas.toDataURL('image/png');
 			}
 		};
+	});
+
+	afterNavigate((navigation) => {
+		if (navigation.to?.url) {
+			trackPageView(navigation.to.url.pathname);
+		}
 	});
 </script>
 
