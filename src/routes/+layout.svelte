@@ -4,6 +4,10 @@
 	import { onMount } from 'svelte';
 	import { afterNavigate } from '$app/navigation';
 	import { initGA, trackPageView } from '$lib/analytics';
+	import { dev } from '$app/environment';
+	import { injectAnalytics } from '@vercel/analytics/sveltekit';
+
+	injectAnalytics({ mode: dev ? 'development' : 'production' });
 
 	let { children } = $props();
 	let favicon = $state(rawFavicon);
