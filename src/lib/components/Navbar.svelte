@@ -135,9 +135,9 @@
 
 <header class="navbar-wrapper">
 	<div class="navbar">
-		<a href="/" class="nav-brand">
+		<div class="nav-brand">
 			<Logo />
-		</a>
+		</div>
 
 		<nav class="nav-links desktop-only" aria-label="Navegación principal">
 			<!-- Servicios Dropdown -->

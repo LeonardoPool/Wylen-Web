@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import wylenLogoSvg from '$lib/images/app/WYLEN LOGO WEB SVG.svg';
 
 	// ─── Physics constants ────────────────────────────────────────────────────────
 
@@ -169,41 +170,74 @@
 	href="/"
 	class="logo-link"
 	aria-label="WYLEN — inicio"
-	style:letter-spacing={reducedMotion ? '-0.02em' : letterSpacing}
 >
-	<!-- W: fixed left anchor -->
-	<span class="char char-w">W</span>
+	<img
+		src={wylenLogoSvg}
+		alt=""
+		aria-hidden="true"
+		class="nav-logo-icon"
+		width="38"
+		height="38"
+	/>
+	<span
+		class="logo-letters"
+		style:letter-spacing={reducedMotion ? '-0.02em' : letterSpacing}
+	>
+		<!-- W: fixed left anchor -->
+		<span class="char char-w">W</span>
 
-	<!-- YLE: collapsible characters segment -->
-	<span class="yle-wrapper">
-		{#each 'YLE' as char}
-			<span
-				class="yle-char"
-				style:max-width={isMobile || reducedMotion ? (currentProgress >= 0.5 ? '0px' : '0.62em') : `${((1 - currentProgress) * 0.62).toFixed(3)}em`}
-				style:opacity={isMobile || reducedMotion ? (currentProgress >= 0.5 ? '0' : '1') : `${(1 - currentProgress).toFixed(3)}`}
-			>{char}</span>
-		{/each}
+		<!-- YLE: collapsible characters segment -->
+		<span class="yle-wrapper">
+			{#each 'YLE' as char}
+				<span
+					class="yle-char"
+					style:max-width={isMobile || reducedMotion ? (currentProgress >= 0.5 ? '0px' : '0.62em') : `${((1 - currentProgress) * 0.62).toFixed(3)}em`}
+					style:opacity={isMobile || reducedMotion ? (currentProgress >= 0.5 ? '0' : '1') : `${(1 - currentProgress).toFixed(3)}`}
+				>{char}</span>
+			{/each}
+		</span>
+
+		<!-- N: fixed right anchor -->
+		<span class="char char-n">N</span>
 	</span>
-
-	<!-- N: fixed right anchor -->
-	<span class="char char-n">N</span>
 </a>
 
 <style>
 	/* ── Container ─────────────────────────────────────────────── */
 	.logo-link {
 		display: inline-flex;
+		align-items: center;
+		gap: 0.75rem;
+		text-decoration: none;
+		user-select: none;
+		white-space: nowrap;
+		cursor: pointer;
+		transform: translateZ(0);
+	}
+
+	/* ── Logo Icon ─────────────────────────────────────────────── */
+	.nav-logo-icon {
+		width: 38px;
+		height: 38px;
+		object-fit: contain;
+		display: block;
+		flex-shrink: 0;
+		transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+	}
+
+	.logo-link:hover .nav-logo-icon {
+		transform: scale(1.06);
+	}
+
+	/* ── Wordmark Letters ──────────────────────────────────────── */
+	.logo-letters {
+		display: inline-flex;
 		align-items: baseline;
 		font-family: var(--font-brand, 'Switzer', sans-serif);
 		font-weight: 700;
 		font-size: 1.65rem;
 		line-height: 1;
-		letter-spacing: -0.02em;
 		color: var(--text-dark, #0f0f0f);
-		text-decoration: none;
-		user-select: none;
-		white-space: nowrap;
-		cursor: pointer;
 		transform: translateZ(0);
 	}
 
@@ -236,6 +270,13 @@
 	/* ── Responsive ────────────────────────────────────────────── */
 	@media (max-width: 767px) {
 		.logo-link {
+			gap: 0.55rem;
+		}
+		.nav-logo-icon {
+			width: 32px;
+			height: 32px;
+		}
+		.logo-letters {
 			font-size: 1.45rem;
 		}
 		.yle-wrapper {
@@ -246,6 +287,9 @@
 	/* ── Reduced motion: no animations ────────────────────────── */
 	@media (prefers-reduced-motion: reduce) {
 		.yle-char {
+			transition: none !important;
+		}
+		.nav-logo-icon {
 			transition: none !important;
 		}
 	}
