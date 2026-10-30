@@ -212,7 +212,6 @@
 		user-select: none;
 		white-space: nowrap;
 		cursor: pointer;
-		transform: translateZ(0);
 	}
 
 	/* ── Logo Icon ─────────────────────────────────────────────── */
@@ -222,6 +221,7 @@
 		object-fit: contain;
 		display: block;
 		flex-shrink: 0;
+		image-rendering: -webkit-optimize-contrast;
 		transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 	}
 
@@ -238,13 +238,11 @@
 		font-size: 1.65rem;
 		line-height: 1;
 		color: var(--text-dark, #0f0f0f);
-		transform: translateZ(0);
 	}
 
 	/* ── Fixed characters ──────────────────────────────────────── */
 	.char {
 		display: inline-block;
-		transform: translateZ(0);
 	}
 
 	/* ── Collapsible wrapper segment ────────────────────────────── */
@@ -253,7 +251,6 @@
 		align-items: baseline;
 		vertical-align: baseline;
 		overflow: hidden;
-		transform: translateZ(0);
 	}
 
 	/* ── Collapsible character blocks ───────────────────────────── */
@@ -264,7 +261,6 @@
 		vertical-align: baseline;
 		transform-origin: left center;
 		will-change: max-width, opacity;
-		transform: translateZ(0);
 	}
 
 	/* ── Responsive ────────────────────────────────────────────── */
